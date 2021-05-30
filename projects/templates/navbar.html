@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+  <style>
+    .dropbtn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .dropdown-content a:hover {background-color: #f1f1f1;}
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    .dropdown:hover .dropbtn {
+      background-color: #3e8e41;
+    }
+    </style>
+</head>
+
+<body>
+  <!--top header-->
+  <header>
+    <!--most top info -->
+    <div style="height: 40px; background: #f2f9ee"></div>
+    <!-- End most top info -->
+
+    <nav class="navbar  navbar-expand-lg navbar-light top-navbar" data-toggle="sticky-onscroll">
+      <div class="container">
+        <a class="navbar-brand" href="/">RATE-ME</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav pull-right">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'search_all_projects' %}">All Projects</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="btn btn-primary" href="{% url 'create_new_project' %}">NEW WEBAPP/WEBSITE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'profile' user.id %}">Profile</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">logout</a>
+            </li>
+           
+            {% else %}
+            <li class="nav-item">
+              <a class="btn btn-primary" href="/accounts/login">LOGIN</a>
+            </li>
+            {%endif%}
+            
+          </ul>
+          <div class="dropdown" style="float:left;">
+            <button class="dropbtn">API Endpoints</button>
+            <div class="dropdown-content">
+            <a href="{%url 'profilelist'%}" target="blank">Get Profile Json</a>
+            <a href="{%url 'projectlist' %}" target="blank">Get Projects Json </a>
+          
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+  </header>
+  <!-- End top header-->
+  <script src="" async defer></script>
+</body>
+
+</html>
