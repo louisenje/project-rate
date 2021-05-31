@@ -1,0 +1,3 @@
+Hello {{name}}
+
+Welcome to the Project-Rate newsletter You will find the various projects and also receive the toprated projects!.
