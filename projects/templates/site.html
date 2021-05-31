@@ -1,0 +1,192 @@
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{%load static%}
+{%block styles%}
+<link rel="stylesheet" href="{% static 'profile.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+<link rel="stylesheet" href="{% static 'navbar/navbar.css' %}">
+<!-- ************* -->
+<link href="https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'navbar/navbar.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'site/site.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/text_hover.css' %}">
+    <link rel="stylesheet" href="{% static 'css/text_hover_on_click.css' %}">
+    <link rel="stylesheet" href="{% static 'css/text_hover_on_click.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/text_hover.min.css' %}">
+   
+{%endblock%}
+{% block content %}
+{{block.super}}
+<div class="top" >
+  <img src="{{projects.main_picture.url}}" alt="" style= "width:400px"  height="350px" style="text-align: center;" >
+</div>
+<!-- <button id="myBtn">RATE THIS SITE</button> -->
+<a href="#myBtn" aria-valuetext="Ratings">RATE THIS SITE</a>
+<!-- ***************DESCRIPTION AND LIVE LINK******************** -->
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body descal">
+        <h5 class="card-title descheader">{{projects.title.upper}}</h5>
+        <h3 class="desc">Description...</h3>
+        <p class="card-text">>>{{projects.description}}</p>
+        <a href="{{projects.link}}" target="blank" class="btn btn-primary">LIVE LINK</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--*********** SCREENSHOTS********** -->
+<h1>{{message}}</h1>
+<div class="screenshot">
+  <h3 id="scrc">SCREENSHOTS</h3>
+  <div class="row">
+    <div class="col-md-4">
+      <img src="{{projects.screenshot1.url}}" alt="Snow" style="width:100%"  height="350px">
+  </div>
+  <div class="col-md-4">
+    <img src="{{projects.screenshot2.url}}" alt="Forest" style="width:100%"  height="350px">
+  </div>
+     <div class="col-md-4">
+      <img src="{{projects.screenshot3.url}}" alt="Mountains" style="width:100%" height="350px">
+     </div>
+  
+     
+    </div>
+  </div>
+<!-- Trigger/Open The Modal -->
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>RATE THIS SITE...</h2>
+      <span class="close">&times;</span>
+      
+    </div>
+    <div class="modal-body">
+      <div class="card">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% bootstrap_form form%}
+          <input type="submit" class="btn btn-success btn-lg" value="RATE!">
+        </form>
+    
+      </div>  
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
+
+</div>
+
+<!-- **************************JUDGES************8 -->
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body descal">
+        <h5 class="card-title descheader">REVIEWS</h5>
+        <h3 class="desc">RATINGS...</h3>
+        {%if av%}
+
+        <p >AVERAGE RATINGS--{{av}}%<span title="The criteria used for calculating the average rating is..((TOTAL OF ALL THE RATINGS *100)/number of people who rated)">&#63;</span></p>
+        {%else%}
+        <p>NO Ratings yet!</p>
+        {%endif%}
+        
+        
+        <ol>
+          {%for rate in rates%}
+          {{rate.averageOfuser}}==
+          <li>{{rate.user.username}}---DESIGN--{{rate.rate_by_design}} USABILITY--{{rate.rate_by_usability}}CONTENT--{{rate.rate_by_content}}CREATIVITY--{{rate.rate_by_creativity}}</li>
+          
+           {%endfor%}
+        </ol>
+       
+        
+        <p class="card-text">------</p>
+       
+       
+      </div>
+      <button id="myBtn" class="btn btn-danger" type="button">RATE THIS SITE</button>
+
+    </div>
+  </div>
+
+<!-- *********************************COMMENTS******************* -->
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body descal">
+        <h5 class="card-title descheader">COMMENTS</h5>
+        
+       
+       
+        <ol>
+          {%for comment in comments%}
+          <li>{{comment.user.username}}--{{comment.comment}}---</li>
+          
+          {%endfor%}
+        </ol>
+        
+        
+        <p class="card-text">
+           <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% bootstrap_form commentform%}
+          <input type="submit" class="btn btn-success btn-lg" value="COMMENT">
+        </form></p>
+       
+       
+      </div>
+    </div>
+  
+  </div>
+</div>
+
+{% endblock %}
+{%block scripts%}
+<script>
+  // Get the modal
+  var modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks the button, open the modal 
+  btn.onclick = function () {
+    modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function () {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+{% endblock %}
