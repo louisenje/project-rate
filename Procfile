@@ -1,1 +1,1 @@
-web: gunicorn project-rate.wsgi --log-file -
+web: gunicorn rateme.wsgi --log-file -
