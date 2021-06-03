@@ -81,6 +81,11 @@ As a user I would like:
 > You can reach out to me at  louisenje@gmail.com
 for Reviews, Advice, Collaborations and Comments
 
+## API endpoints
+http://127.0.0.1:8000/api/profile/?format=json
+http://127.0.0.1:8000/api/webapp/?format=json
+
+
 ## Licence
 
 > MIT License
